@@ -8,10 +8,10 @@ import {IProduct} from './product';
 })
 
 export class ProductListComponent implements OnInit {
-    pageTitle: string = 'Product List';
-    imageWidth: number = 50;
-    imageMargin: number = 2;
-    showImage: boolean = false;
+    pageTitle = 'Product List';
+    imageWidth = 50;
+    imageMargin = 2;
+    showImage = false;
     _listFilter: string;
 
     constructor() {
@@ -55,7 +55,9 @@ export class ProductListComponent implements OnInit {
 
     performFilter(filterBy: string): IProduct[] {
         filterBy = filterBy.toLocaleLowerCase();
-        return this.products.filter((product: IProduct) => product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+        return this.products.filter((product: IProduct) => {
+            return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1;
+        });
     }
 
     toggleImage(): void {
@@ -64,5 +66,9 @@ export class ProductListComponent implements OnInit {
 
     ngOnInit(): void {
         console.log('In OnInit');
+    }
+
+    onRatingClicked(message: string): void {
+        this.pageTitle = 'Product List: ' + message;
     }
 }
